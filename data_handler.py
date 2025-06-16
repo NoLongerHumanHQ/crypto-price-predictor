@@ -43,7 +43,7 @@ class CryptoDataHandler:
         }
     
     @st.cache_data(ttl=300)
-    def get_available_cryptocurrencies(self):
+    def get_available_cryptocurrencies(_self):
         """
         Returns a list of available cryptocurrencies for selection.
         Uses caching to avoid excessive API calls.
@@ -54,10 +54,10 @@ class CryptoDataHandler:
         try:
             # In a production app, this would fetch from CoinGecko API
             # However, for rate limit purposes we'll use a predefined list
-            return list(self.top_cryptos.keys())
+            return list(_self.top_cryptos.keys())
         except Exception as e:
             st.error(f"Error fetching available cryptocurrencies: {e}")
-            return list(self.top_cryptos.keys())[:5]  # Return top 5 as fallback
+            return list(_self.top_cryptos.keys())[:5]  # Return top 5 as fallback
     
     def get_crypto_name(self, crypto_id):
         """
@@ -113,7 +113,7 @@ class CryptoDataHandler:
             return None
     
     @st.cache_data(ttl=3600)
-    def get_historical_data(self, crypto_id, days):
+    def get_historical_data(_self, crypto_id, days):
         """
         Get historical price data for a cryptocurrency
         
@@ -133,11 +133,11 @@ class CryptoDataHandler:
                 'interval': 'daily'
             }
             
-            data = self._make_api_request(endpoint, params)
+            data = _self._make_api_request(endpoint, params)
             
             if not data:
                 # Fallback to mock data if API fails
-                return self._generate_mock_data(crypto_id, days)
+                return _self._generate_mock_data(crypto_id, days)
             
             # Process the data
             prices = data.get('prices', [])
@@ -162,13 +162,13 @@ class CryptoDataHandler:
             df = df.fillna(method='bfill')
             
             # Add technical indicators
-            df = self._add_technical_indicators(df)
+            df = _self._add_technical_indicators(df)
             
             return df
             
         except Exception as e:
             st.error(f"Error fetching historical data: {e}")
-            return self._generate_mock_data(crypto_id, days)
+            return _self._generate_mock_data(crypto_id, days)
     
     def _generate_mock_data(self, crypto_id, days):
         """
@@ -267,7 +267,7 @@ class CryptoDataHandler:
         return df
     
     @st.cache_data(ttl=300)
-    def get_market_cap(self, crypto_id):
+    def get_market_cap(_self, crypto_id):
         """
         Get market cap for a cryptocurrency
         
@@ -279,7 +279,7 @@ class CryptoDataHandler:
         """
         try:
             endpoint = f"coins/{crypto_id}"
-            data = self._make_api_request(endpoint)
+            data = _self._make_api_request(endpoint)
             
             if data and 'market_data' in data:
                 return data['market_data']['market_cap']['usd']
@@ -301,7 +301,7 @@ class CryptoDataHandler:
             return 1000000000  # $1B
     
     @st.cache_data(ttl=300)
-    def get_24h_volume(self, crypto_id):
+    def get_24h_volume(_self, crypto_id):
         """
         Get 24h trading volume for a cryptocurrency
         
@@ -313,7 +313,7 @@ class CryptoDataHandler:
         """
         try:
             endpoint = f"coins/{crypto_id}"
-            data = self._make_api_request(endpoint)
+            data = _self._make_api_request(endpoint)
             
             if data and 'market_data' in data:
                 return data['market_data']['total_volume']['usd']
