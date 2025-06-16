@@ -353,7 +353,7 @@ This software is for educational and research purposes only. Cryptocurrency trad
 - **Documentation**: [Project Wiki](../../wiki)
 - **Issues**: [GitHub Issues](../../issues)
 - **Discussions**: [GitHub Discussions](../../discussions)
-- **Email**: support@nolongerhumanhq.com
+- **Email**: patel.veeru@protonmail.com
 
 ## 📜 License
 
